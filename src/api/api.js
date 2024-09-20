@@ -40,6 +40,8 @@ export const registerUser = (userData) => api.post("/users/register", userData);
 export const loginUser = (userData) => api.post("/users/login", userData);
 export const fetchUser = () => api.get("/users");
 
+export const fetchBookDetails = (id) => api.get(`/books/${id}`);
+
 export default api;
 
 // import axios from "axios";
