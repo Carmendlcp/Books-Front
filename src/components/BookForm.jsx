@@ -6,6 +6,10 @@ const BookForm = () => {
   // Definimos el estado local para cada campo del formulario
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [synopsis, setSynopsis] = useState("");
+  const [publicationDate, setPublicationDate] = useState("");
+  const [pageCount, setPageCount] = useState("");
   const [isBorrowed, setIsBorrowed] = useState(false);
   const [borrowedBy, setBorrowedBy] = useState("");
   const [currentPage, setCurrentPage] = useState("");
@@ -21,6 +25,10 @@ const BookForm = () => {
     const newBook = {
       title,
       author,
+      category,
+      synopsis,
+      publicationDate,
+      pageCount: parseInt(pageCount, 10),
       isBorrowed,
       borrowedBy,
       currentPage: parseInt(currentPage, 10), // Convertimos a número
@@ -58,6 +66,45 @@ const BookForm = () => {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
           required
+        />
+      </div>
+
+      <div>
+        <label htmlFor="category">Categoría:</label>
+        <input
+          type="text"
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="synopsis">Sinopsis:</label>
+        <textarea
+          id="synopsis"
+          value={synopsis}
+          onChange={(e) => setSynopsis(e.target.value)}
+        ></textarea>
+      </div>
+
+      <div>
+        <label htmlFor="publicationDate">Fecha de publicación:</label>
+        <input
+          type="date"
+          id="publicationDate"
+          value={publicationDate}
+          onChange={(e) => setPublicationDate(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="pageCount">Número de páginas:</label>
+        <input
+          type="number"
+          id="pageCount"
+          value={pageCount}
+          onChange={(e) => setPageCount(e.target.value)}
         />
       </div>
 

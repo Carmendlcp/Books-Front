@@ -1,0 +1,19 @@
+.rating {
+  display: flex;
+  direction: row;
+}
+
+.star {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc;
+}
+
+.star.selected {
+  color: #f5c518;
+}
+
+.star:hover,
+.star:hover ~ .star {
+  color: #f5c518;
+}

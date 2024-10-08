@@ -1,0 +1,32 @@
+.book-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-header {
+  display: flex;
+  gap: 20px;
+}
+
+.book-cover {
+  max-width: 200px;
+  border-radius: 5px;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-synopsis {
+  margin-top: 20px;
+}
+
+.book-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
