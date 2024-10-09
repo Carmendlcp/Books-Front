@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchBookDetails, updateBook } from "../api/api.js";
-import Rating from "../components/Rating";
+import { fetchBookDetails } from "../api/api.js";
 
 const BookDetailsPage = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [error, setError] = useState(null);
-  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     const getBookDetails = async () => {
       try {
         const response = await fetchBookDetails(id);
         setBook(response.data);
-        setRating(response.data.rating);
       } catch (err) {
         setError("Error fetching book details");
       }
@@ -22,18 +19,6 @@ const BookDetailsPage = () => {
 
     getBookDetails();
   }, [id]);
-
-  //método handleRatingChange
-  const handleRatingChange = async (newRating) => {
-    setRating(newRating);
-    console.log("Nuevo rating seleccionado:", newRating);
-    try {
-      await updateBook(id, { ...book, rating: newRating });
-      setBook((prevBook) => ({ ...prevBook, rating: newRating })); // Actualizamos el estado del libro con el nuevo rating
-    } catch (err) {
-      console.log("Error updating rating", err);
-    }
-  };
 
   if (error) return <p>{error}</p>;
   if (!book) return <p>Loading...</p>;
@@ -46,8 +31,6 @@ const BookDetailsPage = () => {
           <h1>{book.title}</h1>
           <h2>{book.author}</h2>
           <p>Category: {book.category}</p>
-          <p>Rating: {rating} ★</p>
-          <Rating value={rating} onChange={handleRatingChange} />
           <p>Borrowed By: {book.borrowedBy}</p>
           <p>Is Borrowed: {book.isBorrowed ? "Yes" : "No"}</p>
           <p>

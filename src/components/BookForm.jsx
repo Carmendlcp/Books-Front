@@ -4,6 +4,7 @@ import { addBook } from "../api/api";
 
 const BookForm = () => {
   // Definimos el estado local para cada campo del formulario
+  const [coverImage, setCoverImage] = useState("");
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
@@ -21,6 +22,21 @@ const BookForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evita que la página se recargue al enviar el formulario
 
+    // Valida que la URL de la imagen sea correcta
+    const isValidURL = (url) => {
+      try {
+        new URL(url);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    };
+
+    if (!isValidURL(coverImage)) {
+      alert("Por favor ingresa una URL válida para la imagen");
+      return;
+    }
+
     // Llamamos a la función onSubmit y pasamos los datos del formulario
     const newBook = {
       title,
@@ -33,6 +49,7 @@ const BookForm = () => {
       borrowedBy,
       currentPage: parseInt(currentPage, 10), // Convertimos a número
       review,
+      coverImage,
     };
 
     try {
@@ -47,6 +64,15 @@ const BookForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="coverImage">URL de la portada:</label>
+        <input
+          type="text"
+          id="coverImage"
+          value={coverImage}
+          onChange={(e) => setCoverImage(e.target.value)}
+        />
+      </div>
       <div>
         <label htmlFor="title">Título:</label>
         <input
